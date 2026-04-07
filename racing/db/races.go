@@ -74,6 +74,7 @@ func (r *racesRepo) applyFilter(query string, filter *racing.ListRacesRequestFil
 
 	if len(filter.MeetingIds) > 0 {
 		clauses = append(clauses, "meeting_id IN ("+strings.Repeat("?,", len(filter.MeetingIds)-1)+"?)")
+		clauses = append(clauses, "visible = 1")
 
 		for _, meetingID := range filter.MeetingIds {
 			args = append(args, meetingID)
